@@ -31,7 +31,6 @@
     .song-info { flex: 1; overflow: hidden; }
     .song-title { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .song-title.active { color: #1DB954; }
-    .loading { color: #b3b3b3; font-size: 14px; padding: 12px; text-align: center; }
     .player { grid-column: 1 / -1; background: #181818; border-top: 1px solid #282828; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 16px; }
     .now-playing { display: flex; align-items: center; gap: 12px; min-width: 200px; }
     .now-icon { width: 44px; height: 44px; background: #1DB954; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
@@ -69,13 +68,11 @@
 
   <div class="main">
     <h1>RAiOSH</h1>
-    <p class="subtitle" id="songCount">6 songs</p>
+    <p class="subtitle">6 songs</p>
     <div class="search-wrap">
       <input type="text" id="searchInput" placeholder="🔍  Search songs..." oninput="renderList()" />
     </div>
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-      <h2>All Songs</h2>
-    </div>
+    <h2>All Songs</h2>
     <div class="song-list" id="songList"></div>
   </div>
 
@@ -89,11 +86,11 @@
     </div>
     <div>
       <div class="controls">
-        <button id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">🔀</button>
+        <button id="shuffleBtn" onclick="toggleShuffle()">🔀</button>
         <button onclick="prevSong()">⏮</button>
         <button id="playBtn" onclick="togglePlay()">▶</button>
         <button onclick="nextSong()">⏭</button>
-        <button id="repeatBtn" onclick="toggleRepeat()" title="Repeat">🔁</button>
+        <button id="repeatBtn" onclick="toggleRepeat()">🔁</button>
       </div>
       <div class="progress-area" style="margin-top:8px;">
         <span class="time" id="currentTime">0:00</span>
@@ -113,12 +110,12 @@
 
   <script>
     const songs = [
-      { name: "Moonlight Kiss", url: "https://drive.google.com/uc?export=download&id=1rjxH1uxRCF5AIW8FDuXSR98JxgB848uB" },
-      { name: "Teri Baahon Mein", url: "https://drive.google.com/uc?export=download&id=1sgERfjXAZdzoElG-ZAIGptX3IozgkpuR" },
-      { name: "Notebook Mein Dil", url: "https://drive.google.com/uc?export=download&id=12ZV28i3vQgkffT_JqgpQkLuM1hqR31Uc" },
-      { name: "Chaati Ke Lagaai", url: "https://drive.google.com/uc?export=download&id=1RKMmSh9VQC1ntOCYlyEAsuttJNgTpeym" },
-      { name: "Jaat Ka Der", url: "https://drive.google.com/uc?export=download&id=1BRv8ZIfRHtFCa8ER_Td6O6ocOuSFVm-k" },
-      { name: "Song 6", url: "https://drive.google.com/uc?export=download&id=13heQrsbSFRE_jpvgzL8vzvVwsq2oBXaZ" }
+      { name: "Moonlight Kiss", url: "https://res.cloudinary.com/dmk9znonv/video/upload/v1779274805/Moonlight_Kiss_omgjya.mp3" },
+      { name: "Jaat Ka Der", url: "https://res.cloudinary.com/dmk9znonv/video/upload/v1779274812/%E0%A4%9C%E0%A4%BE%E0%A4%9F_%E0%A4%95%E0%A4%BE_%E0%A4%A1%E0%A5%87%E0%A4%B0_a8zwsh.mp3" },
+      { name: "Teri Baahon Mein", url: "https://res.cloudinary.com/dmk9znonv/video/upload/v1779274811/Teri_Baahon_Mein_fcnrru.mp3" },
+      { name: "Chaati Ke Lagaai", url: "https://res.cloudinary.com/dmk9znonv/video/upload/v1779274810/song.mp3_z6zdvt.mp3" },
+      { name: "Notebook Mein Dil", url: "https://res.cloudinary.com/dmk9znonv/video/upload/v1779274809/Notebook_Mein_Dil_lzagfu.mp3" },
+      { name: "Ye Dhuniya Ek Chalava Hai", url: "https://res.cloudinary.com/dmk9znonv/video/upload/v1779274847/song_mrdo9j.mp3" }
     ];
 
     const audio = document.getElementById('audio');
@@ -139,7 +136,7 @@
       const filtered = songs.filter(s => s.name.toLowerCase().includes(query));
 
       document.getElementById('songList').innerHTML = filtered.length === 0
-        ? '<p style="color:#b3b3b3; padding:20px;">No songs match your search.</p>'
+        ? '<p style="color:#b3b3b3;padding:20px;">No songs match your search.</p>'
         : filtered.map(s => {
             const i = songs.indexOf(s);
             return `<div class="song-row ${i === currentIndex ? 'active' : ''}" onclick="playSong(${i})">
